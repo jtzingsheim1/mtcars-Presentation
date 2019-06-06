@@ -23,4 +23,34 @@ library(tidyverse)
 library(plotly)
 
 
-# Part 1) Loading and preprocessing the data------------------------------------
+# Part 1) Load and process the data---------------------------------------------
+
+# Load data
+data("mtcars")
+mtcars <- as_tibble(mtcars, rownames = "vehicle")  # Put row names in a column
+
+# Convert data types
+mtcars <- mtcars %>%
+  mutate(vs = as.factor(vs)) %>%
+  mutate(am = as.factor(am)) %>%
+  mutate(gear = as.factor(gear))
+
+# The vs and am variables are coded with zeros and ones, but it will be easier
+# to work with them by the names those values represent:
+levels(mtcars$vs) <- c("V-shaped", "Straight")
+levels(mtcars$am) <- c("Automatic", "Manual")
+
+# Preview the data
+mtcars
+
+
+# Part 2) Make the plot---------------------------------------------------------
+
+# Make the plot
+plot_ly(x = mtcars$wt, y = mtcars$hp, z = mtcars$mpg, type = "scatter3d",
+        mode = "markers", color = mtcars$am) %>%
+  layout(scene = list(xaxis = list(title = "Vehicle Weight [klbs]"),
+                      yaxis = list(title = "Horsepower [hp]"),
+                      zaxis = list(title = "Fuel Economy [mpg]"))) %>%
+  print()
+
