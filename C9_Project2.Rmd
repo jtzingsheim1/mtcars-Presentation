@@ -28,14 +28,49 @@ page is hosted by GitHub Pages, and the repo for this project is [here][1]
 
 ## Part 1) Loading and Processing the Data
 
+In the code chunk below the required packages are loaded and the raw data is
+loaded in. The data are then processed to prepare for plotting.
+
+```{r loading, message = FALSE}
+
+library(datasets)  # For the mtcars data
+library(tidyverse)
+library(plotly)
+
+# Load data
+data("mtcars")
+mtcars <- as_tibble(mtcars, rownames = "vehicle")  # Put row names in a column
+
+# Convert data types
+mtcars <- mtcars %>%
+  mutate(vs = as.factor(vs)) %>%
+  mutate(am = as.factor(am)) %>%
+  mutate(gear = as.factor(gear))
+
+# The vs and am variables are coded with zeros and ones, but it will be easier
+# to work with them by the names those values represent:
+levels(mtcars$vs) <- c("V-shaped", "Straight")
+levels(mtcars$am) <- c("Automatic", "Manual")
+
+# Preview the data
+mtcars
+
+```
 
 
+## Part 2) Generating the Map
 
+In the next code chunk the data are placed into the map.
 
+```{r plotting}
 
+# Make the plot
+plot_ly(x = mtcars$wt, y = mtcars$hp, z = mtcars$mpg, type = "scatter3d",
+        mode = "markers", color = mtcars$am) %>%
+  layout(scene = list(xaxis = list(title = "Vehicle Weight [klbs]"),
+                      yaxis = list(title = "Horsepower [hp]"),
+                      zaxis = list(title = "Fuel Economy [mpg]"))) %>%
+  print()
 
-
-
-
-
+```
 
