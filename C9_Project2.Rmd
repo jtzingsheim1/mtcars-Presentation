@@ -24,7 +24,7 @@ Markdown that features a plot created with `plotly`.
 To meet the objective a 3D plot of the `mtcars` data was created. This report
 page is hosted by GitHub Pages, and the repo for this project is [here][1]
 
-[1]: xxxxx  "GitHub repo"
+[1]: https://github.com/jtzingsheim1/mtcars-Presentation  "GitHub repo"
 
 
 ## Load and Process the Data
