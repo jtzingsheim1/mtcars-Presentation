@@ -1,0 +1,41 @@
+---
+title: "Plot of mtcars Data"
+author: "Justin Z"
+date: "June 5, 2019"
+output: ioslides_presentation
+---
+
+
+```{r setup, include = FALSE}
+
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+
+## Overview
+
+This report is for the week 3 peer-graded project in the Developing Data
+Products course from Johns Hopkins University within the Data Science
+Specialization on Coursera. The instructions say to create a web page using R
+Markdown that features a plot created with `plotly`.
+
+To meet the objective a 3D plot of the `mtcars` data was created. This report
+page is hosted by GitHub Pages, and the repo for this project is [here][1]
+
+[1]: xxxxx  "GitHub repo"
+
+
+## Part 1) Loading and Processing the Data
+
+
+
+
+
+
+
+
+
+
+
+
