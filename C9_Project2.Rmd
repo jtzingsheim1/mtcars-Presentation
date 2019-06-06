@@ -1,5 +1,6 @@
 ---
 title: "Plot of mtcars Data"
+subtitle: "Use left and right arrow keys to navigate slides"
 author: "Justin Z"
 date: "June 5, 2019"
 output: ioslides_presentation
@@ -8,14 +9,14 @@ output: ioslides_presentation
 
 ```{r setup, include = FALSE}
 
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
 
 ## Overview
 
-This report is for the week 3 peer-graded project in the Developing Data
+This presentation is for the week 3 peer-graded project in the Developing Data
 Products course from Johns Hopkins University within the Data Science
 Specialization on Coursera. The instructions say to create a web page using R
 Markdown that features a plot created with `plotly`.
@@ -26,20 +27,17 @@ page is hosted by GitHub Pages, and the repo for this project is [here][1]
 [1]: xxxxx  "GitHub repo"
 
 
-## Part 1) Loading and Processing the Data
+## Load and Process the Data
 
-In the code chunk below the required packages are loaded and the raw data is
-loaded in. The data are then processed to prepare for plotting.
+```{r load1, message = FALSE}
 
-```{r loading, message = FALSE}
-
-library(datasets)  # For the mtcars data
-library(tidyverse)
-library(plotly)
+# Load packages
+library(datasets); library(tidyverse); library(plotly)
 
 # Load data
 data("mtcars")
-mtcars <- as_tibble(mtcars, rownames = "vehicle")  # Put row names in a column
+# Convert to tibble and put row names in a column
+mtcars <- as_tibble(mtcars, rownames = "vehicle")  
 
 # Convert data types
 mtcars <- mtcars %>%
@@ -47,30 +45,47 @@ mtcars <- mtcars %>%
   mutate(am = as.factor(am)) %>%
   mutate(gear = as.factor(gear))
 
-# The vs and am variables are coded with zeros and ones, but it will be easier
-# to work with them by the names those values represent:
+# Convert factor values
 levels(mtcars$vs) <- c("V-shaped", "Straight")
 levels(mtcars$am) <- c("Automatic", "Manual")
 
-# Preview the data
+```
+
+
+## Preview the Data
+
+```{r load2, echo = FALSE}
+
 mtcars
 
 ```
 
 
-## Part 2) Generating the Map
+## Create the Plot
 
-In the next code chunk the data are placed into the map.
-
-```{r plotting}
+```{r plot1}
 
 # Make the plot
-plot_ly(x = mtcars$wt, y = mtcars$hp, z = mtcars$mpg, type = "scatter3d",
-        mode = "markers", color = mtcars$am) %>%
+cars.plot <- plot_ly(x = mtcars$wt, y = mtcars$hp,
+                    z = mtcars$mpg, type = "scatter3d",
+                    mode = "markers", color = mtcars$am) %>%
   layout(scene = list(xaxis = list(title = "Vehicle Weight [klbs]"),
                       yaxis = list(title = "Horsepower [hp]"),
-                      zaxis = list(title = "Fuel Economy [mpg]"))) %>%
-  print()
+                      zaxis = list(title = "Fuel Economy [mpg]")))
 
 ```
+
+
+## View the Plot
+
+Click and drag to view different angles.
+
+```{r plot2, echo = FALSE, warning = FALSE}
+
+cars.plot
+
+```
+
+
+## Thank you!
 
